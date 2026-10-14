@@ -1,0 +1,770 @@
+{
+  "companies": {
+    "allianz": {
+      "label": "Allianz",
+      "tab": "AZ",
+      "officialName": "ALLIANZ SEGUROS S.A",
+      "columns": [
+        "RECIBO",
+        "RAMO",
+        "RAMO_BR",
+        "MODALIDADE",
+        "VENCIMENTO",
+        "APOLICE",
+        "PARCELA",
+        "TOT_PARCELAS",
+        "POL_SUSEP",
+        "NR_ADESAO",
+        "ENDO_SUSEP",
+        "PREMIO_TOTAL",
+        "COMISSAO",
+        "CD_FILIAL",
+        "DS_FILIAL",
+        "CD_CORRETOR",
+        "DS_CORRETOR",
+        "CPF_CNPJ",
+        "SEGURADO",
+        "DT_PREV_CANC"
+      ],
+      "mapTo": [
+        {
+          "from": "VENCIMENTO",
+          "to": "Data Vencimento"
+        },
+        {
+          "from": "APOLICE",
+          "to": "Numero Apolice"
+        },
+        {
+          "from": "PARCELA",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "ENDO_SUSEP",
+          "to": "Endosso"
+        },
+        {
+          "from": "PREMIO_TOTAL",
+          "to": "Valor Total"
+        },
+        {
+          "from": "DS_CORRETOR",
+          "to": "Corretor"
+        },
+        {
+          "from": "SEGURADO",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "SEGURADO",
+          "to": "Tomador"
+        }
+      ]
+    },
+    "btg": {
+      "label": "BTG",
+      "tab": "BTG",
+      "officialName": "BTG PACTUAL SEGUROS S.A.",
+      "columns": [
+        "Proposta",
+        "Apólice",
+        "Produto",
+        "UF",
+        "Município",
+        "Nome do Corretor",
+        "Status Parcela",
+        "Início da Vigência",
+        "Fim da Vigência",
+        "Segurado",
+        "Número da Parcela",
+        "Valor Parcela",
+        "Vencimento do Boleto",
+        "Cultura",
+        "Tipo de Parcela"
+      ],
+      "mapTo": [
+        {
+          "from": "Proposta",
+          "to": "Proposta"
+        },
+        {
+          "from": "Apólice",
+          "to": "Numero Apolice"
+        },
+        {
+          "from": "Produto",
+          "to": "PRODUTO"
+        },
+        {
+          "from": "Nome do Corretor",
+          "to": "Corretor"
+        },
+        {
+          "from": "Início da Vigência",
+          "to": "Inicio de Vigência"
+        },
+        {
+          "from": "Fim da Vigência",
+          "to": "Final de Vigência"
+        },
+        {
+          "from": "Segurado",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "Segurado",
+          "to": "Tomador"
+        },
+        {
+          "from": "Número da Parcela",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "Valor Parcela",
+          "to": "Valor Total"
+        },
+        {
+          "from": "Vencimento do Boleto",
+          "to": "Data Vencimento"
+        },
+        {
+          "from": "Cultura",
+          "to": "Cultura"
+        }
+      ]
+    },
+    "essor": {
+      "label": "Essor",
+      "tab": "ES",
+      "officialName": "ESSOR SEGUROS S.A.",
+      "columns": [
+        "Proposta",
+        "Endosso",
+        "Segurado",
+        "Cultura",
+        "Corretor",
+        "Início de Vigência",
+        "N° Parcela",
+        "Valor do Segurado",
+        "Vencimento"
+      ],
+      "mapTo": [
+        {
+          "from": "Proposta",
+          "to": "Proposta"
+        },
+        {
+          "from": "Endosso",
+          "to": "Endosso"
+        },
+        {
+          "from": "Segurado",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "Segurado",
+          "to": "Tomador"
+        },
+        {
+          "from": "Cultura",
+          "to": "Cultura"
+        },
+        {
+          "from": "Corretor",
+          "to": "Corretor"
+        },
+        {
+          "from": "Início de Vigência",
+          "to": "Inicio de Vigência"
+        },
+        {
+          "from": "N° Parcela",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "Valor do Segurado",
+          "to": "Valor Total"
+        },
+        {
+          "from": "Vencimento",
+          "to": "Data Vencimento"
+        }
+      ]
+    },
+    "mapfre": {
+      "label": "Mapfre",
+      "tab": "MF",
+      "officialName": "MAPFRE SEGUROS GERAIS S.A.",
+      "columns": [
+        "AÇÃO_CORRETOR",
+        "PRODUTOS",
+        "APOLICE",
+        "ENDOSSO",
+        "PARCELA",
+        "QTD_TOTAL_PARCELAS",
+        "MEIO_DE_PAGAMENTO",
+        "CÓDIGO_DO_PEDIDO",
+        "MOTIVO_DA_RECUSA",
+        "CÓDIGO DE BARRAS",
+        "VENCIMENTO_PARCELA",
+        "VALOR_PARCELA",
+        "MOEDA",
+        "FAIXA DO AGING",
+        "NOME_CLIENTE",
+        "TELEFONE_CLIENTE",
+        "E-MAIL 1 CLIENTE",
+        "E-MAIL 2 CLIENTE",
+        "DOCUMENTO_CLIENTE"
+      ],
+      "mapTo": [
+        {
+          "from": "APOLICE",
+          "to": "Numero Apolice"
+        },
+        {
+          "from": "ENDOSSO",
+          "to": "Endosso"
+        },
+        {
+          "from": "PARCELA",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "VENCIMENTO_PARCELA",
+          "to": "Data Vencimento"
+        },
+        {
+          "from": "VALOR_PARCELA",
+          "to": "Valor Total"
+        },
+        {
+          "from": "NOME_CLIENTE",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "NOME_CLIENTE",
+          "to": "Tomador"
+        }
+      ]
+    },
+    "now": {
+      "label": "Now",
+      "tab": "NW",
+      "officialName": "NOW SEGUROS AS",
+      "columns": [
+        "Segurado",
+        "Número do Resumo",
+        "Cultura",
+        "Total Parcelas",
+        "Parcela",
+        "Valor Parcela",
+        "Vencimento Prorrogado",
+        "Comissão",
+        "Valor comissão",
+        "Corretor",
+        "Início vigência",
+        "Fim vigência"
+      ],
+      "mapTo": [
+        {
+          "from": "Segurado",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "Segurado",
+          "to": "Tomador"
+        },
+        {
+          "from": "Cultura",
+          "to": "Cultura"
+        },
+        {
+          "from": "Parcela",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "Valor Parcela",
+          "to": "Valor Total"
+        },
+        {
+          "from": "Vencimento Prorrogado",
+          "to": "Data do ultimo vencimento"
+        },
+        {
+          "from": "Corretor",
+          "to": "Corretor"
+        },
+        {
+          "from": "Início vigência",
+          "to": "Inicio de Vigência"
+        },
+        {
+          "from": "Fim vigência",
+          "to": "Final de Vigência"
+        }
+      ]
+    },
+    "sancor": {
+      "label": "Sancor",
+      "tab": "SC",
+      "officialName": "SANCOR SEGUROS DO BRASIL S.A.",
+      "columns": [
+        "Nº Apólice",
+        "NºProposta",
+        "CNPJ/CPF",
+        "Segurado",
+        "Cultura",
+        "Data Plantio",
+        "Status Plantio",
+        "Parcela Pendente",
+        "Vencimento Original",
+        "Vencimento Reprogramado",
+        "Nº Parcela",
+        "Agência",
+        "Prazo Curto"
+      ],
+      "mapTo": [
+        {
+          "from": "Nº Apólice",
+          "to": "Numero Apolice"
+        },
+        {
+          "from": "NºProposta",
+          "to": "Proposta"
+        },
+        {
+          "from": "Segurado",
+          "to": "Tomador"
+        },
+        {
+          "from": "Segurado",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "Cultura",
+          "to": "Cultura"
+        },
+        {
+          "from": "Parcela Pendente",
+          "to": "Valor Total"
+        },
+        {
+          "from": "Nº Parcela",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "Vencimento Original",
+          "to": "Data Vencimento"
+        },
+        {
+          "from": "Vencimento Reprogramado",
+          "to": "Data do ultimo vencimento"
+        }
+      ]
+    },
+    "sompo": {
+      "label": "Sompo",
+      "tab": "SP",
+      "officialName": "SOMPO SEGUROS S.A.",
+      "columns": [
+        "Nome Segurado",
+        "Valor Parcela",
+        "Numero Apolice",
+        "Numero Endosso",
+        "Numero Parcela",
+        "Data Vencimento",
+        "Situacao",
+        "Status",
+        "Permite Boleto",
+        "Termo Sinistralidade",
+        "Numero Cg Cpf",
+        "Codigo Ramo",
+        "Nome Ramo",
+        "Data Inicio Vigencia",
+        "Premio Liquido",
+        "Valor Iof Emitido",
+        "Data Pagamento",
+        "Data Termino Vigencia",
+        "Numero Susep"
+      ],
+      "mapTo": [
+        {
+          "from": "Nome Segurado",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "Nome Segurado",
+          "to": "Tomador"
+        },
+        {
+          "from": "Valor Parcela",
+          "to": "Valor Total"
+        },
+        {
+          "from": "Numero Apolice",
+          "to": "Numero Apolice"
+        },
+        {
+          "from": "Numero Endosso",
+          "to": "Endosso"
+        },
+        {
+          "from": "Numero Parcela",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "Data Vencimento",
+          "to": "Data Vencimento"
+        },
+        {
+          "from": "Data Inicio Vigencia",
+          "to": "Inicio de Vigência"
+        },
+        {
+          "from": "Data Termino Vigencia",
+          "to": "Final de Vigência"
+        }
+      ]
+    },
+    "swissre": {
+      "label": "Swiss Re",
+      "tab": "SR",
+      "officialName": "SWISS RE CORPORATE SOLUTIONS BRASIL SEGUROS S.A.",
+      "columns": [
+        "LOB",
+        "Cliente",
+        "Numero de cotaçao",
+        "Data da cotaçao",
+        "Numero da proposta",
+        "Data da Proposta",
+        "Numero da apolice",
+        "Numero Processo SUSEP",
+        "Numero do Endosso",
+        "Data de emissao",
+        "Inicio de Vigencia",
+        "Fim de vigencia",
+        "Status de emissao",
+        "Status da Apolice",
+        "Apolice Sinistrada (Sim / Não)",
+        "Codigo do Produto",
+        "Ramo",
+        "Produto",
+        "Nome do segurado",
+        "CPF/CNPJ Segurado",
+        "Nome do Tomador",
+        "CNPJ/CPF do Tomador",
+        "Codigo da parcela",
+        "Status da Parcela",
+        "Numero do documento",
+        "Data de Vencimento",
+        "Data de vencimento Prorrogada",
+        "Data de Pagamento",
+        "Valor total da parcela",
+        "Valor Liquido da parcela",
+        "Valor pago da parcela",
+        "Valor da comissao",
+        "Data de pagamento da comissao",
+        "pagamento_primeira_parcela_agro",
+        "proposta_aceita_agro"
+      ],
+      "mapTo": [
+        {
+          "from": "Cliente",
+          "to": "SEGURADO"
+        },
+        {
+          "from": "Cliente",
+          "to": "Tomador"
+        },
+        {
+          "from": "Numero da proposta",
+          "to": "Proposta"
+        },
+        {
+          "from": "Numero da apolice",
+          "to": "Numero Apolice"
+        },
+        {
+          "from": "Numero do Endosso",
+          "to": "Endosso"
+        },
+        {
+          "from": "Inicio de Vigencia",
+          "to": "Inicio de Vigência"
+        },
+        {
+          "from": "Fim de vigencia",
+          "to": "Final de Vigência"
+        },
+        {
+          "from": "Produto",
+          "to": "Cultura"
+        },
+        {
+          "from": "Codigo da parcela",
+          "to": "Numero Parcela"
+        },
+        {
+          "from": "Data de Vencimento",
+          "to": "Data Vencimento"
+        },
+        {
+          "from": "Data de vencimento Prorrogada",
+          "to": "Data do ultimo vencimento"
+        },
+        {
+          "from": "Valor total da parcela",
+          "to": "Valor Total"
+        }
+      ]
+    }
+  },
+  "pagos": {
+    "essor": {
+      "columns": [
+        "Proposta",
+        "Endosso",
+        "Segurado",
+        "N° Parcela"
+      ],
+      "proposta": "Proposta",
+      "endosso": "Endosso",
+      "segurado": "Segurado",
+      "parcela": "N° Parcela"
+    },
+    "sancor": {
+      "columns": [
+        "Número Apólice",
+        "Proposta",
+        "Nome do Segurado",
+        "DATA VENCIMENTO PARCELA SEGURADO"
+      ],
+      "apolice": "Número Apólice",
+      "proposta": "Proposta",
+      "segurado": "Nome do Segurado",
+      "vencimentos": [
+        "DATA VENCIMENTO PARCELA SEGURADO"
+      ]
+    },
+    "swissre": {
+      "columns": [
+        "Cliente",
+        "Numero da proposta",
+        "Numero da apolice",
+        "Numero do Endosso",
+        "Codigo da parcela"
+      ],
+      "apolice": "Numero da apolice",
+      "proposta": "Numero da proposta",
+      "endosso": "Numero do Endosso",
+      "segurado": "Cliente",
+      "parcela": "Codigo da parcela"
+    },
+    "sompo": {
+      "columns": [
+        "Nome do Segurado",
+        "Numero Apolice",
+        "Numero Endosso",
+        "Numero Parcela"
+      ],
+      "apolice": "Numero Apolice",
+      "endosso": "Numero Endosso",
+      "segurado": "Nome do Segurado",
+      "parcela": "Numero Parcela"
+    },
+    "mapfre": {
+      "columns": [
+        "Nome do Cliente",
+        "Apólice",
+        "Número Endosso",
+        "Nº Parcela",
+        "Vencimento Original",
+        "Vencimento Reprogramado"
+      ],
+      "apolice": "Apólice",
+      "endosso": "Número Endosso",
+      "segurado": "Nome do Cliente",
+      "parcela": "Nº Parcela",
+      "vencimentos": [
+        "Vencimento Original",
+        "Vencimento Reprogramado"
+      ]
+    }
+  },
+  "hubspot": {
+    "columns": [
+      "Nome do ticket",
+      "Agente Agro",
+      "Grupo de produção P&C"
+    ],
+    "nomeTicket": "Nome do ticket",
+    "agente": "Agente Agro",
+    "grupoProducao": "Grupo de produção P&C",
+    "agentePorEmail": {
+      "fabio.assuncao@mdsgroup.com": "FABIO ANDREI ASSUNÇÃO",
+      "armando.marczewski@mdsgroup.com": "ARMANDO MARCZEWSKI - ME",
+      "alexandre.veiga@ext.mdsgroup.com": "ALEXANDRE SILVA DA VEIGA LTDA",
+      "rodrigo.miotto@mdsgroup.com": "R.MIOTTO CONSULTORIA EMPRESARIAL",
+      "jean.bellettine@mdsgroup.com": "J. BELLETT CONSULTORIA LTDA",
+      "andrey.ril@ext.mdsgroup.com": "RIL REPRESENTACOES LTDA",
+      "graziele.rodrigues@ext.mdsgroup.com": "Graziele da Rosa Rodrigues",
+      "noe.machado@mdsgroup.com": "NOE FELIPE PORTELA MACHADO LTDA",
+      "kamila.cocco@ext.mdsgroup.com": "Kamila Frison Cocco",
+      "marcos.farias@mdsgroup.com": "Kamila Frison Cocco",
+      "pedro.machado@mdsgroup.com": "PBM AGROGESTAO EMPRESARIAL LTDA",
+      "carlos.bienert@mdsgroup.com": "BIENERT ASSESSORIA E CONSULTORIA LTDA"
+    }
+  },
+  "filialPorAgente": {
+    "alexandre silva da veiga ltda": "Carazinho",
+    "armando marczewski - me": "Cruz Alta",
+    "bienert assessoria e consultoria ltda": "Porto Alegre",
+    "daniella gomes costa": "Porto Alegre",
+    "fabio andrei assuncao": "Cruz Alta",
+    "graziele da rosa rodrigues": "Porto Alegre",
+    "pbm agrogestao empresarial ltda": "Porto Alegre",
+    "j. bellett consultoria ltda": "Porto Alegre",
+    "kamila frison cocco": "Cruz Alta",
+    "noe felipe portela machado ltda": "Carazinho",
+    "r.miotto consultoria empresarial": "Carazinho",
+    "ril representacoes ltda": "Carazinho",
+    "nao localizado": "N/INF",
+    "sem agente": "N/INF"
+  },
+  "consolidadoColumns": [
+    "_Origem",
+    "Grupo de Produção",
+    "Filial",
+    "SEGURADORA",
+    "Numero Apolice",
+    "Endosso",
+    "_Fatura",
+    "_CNPJ do Grupo",
+    "Grupo Econômico",
+    "Tomador",
+    "CNPJ do Tomador",
+    "Corretor",
+    "PRODUTO",
+    "Numero Parcela",
+    "Valor Total",
+    "Data Vencimento",
+    "_Análises de dia de vencimento",
+    "Data do ultimo vencimento",
+    "_Aging",
+    "_Status",
+    "Meio Pagamento",
+    "_Tipo Documento",
+    "SEGURADO",
+    "CPF/CNPJ do Segurado",
+    "Qtde. Prorrogações",
+    "Serasa",
+    "Recebido em :",
+    "Inicio de Vigência",
+    "Final de Vigência",
+    "Projeto",
+    "Agência",
+    "Agente",
+    "Cultura",
+    "Proposta",
+    "Telefone",
+    "origem Busca",
+    "Chave para Localização"
+  ],
+  "ninfColumns": [
+    "_Fatura",
+    "_CNPJ do Grupo",
+    "Grupo Econômico",
+    "CNPJ do Tomador",
+    "CPF/CNPJ do Segurado",
+    "Qtde. Prorrogações",
+    "Serasa"
+  ],
+  "fixedColumns": {
+    "Meio Pagamento": "Boleto"
+  },
+  "brokers": [
+    {
+      "origem": "MDS",
+      "oficial": "MDS CORRETORA E ADMINISTRADORA DE SEGUROS S.A.",
+      "aliases": [
+        "mds",
+        "mds corretora",
+        "MDS CORRETORA E ADMINISTRADORA DE SEGUROS S.A. - PORTO ALEGRE",
+        "mds corretora e administradora de seguros s.a",
+        "mds corretora e administradora de seguros s.a.",
+        "lazam-mds corretora e administradora de",
+        "lazam-mds corretora"
+      ]
+    },
+    {
+      "origem": "TOVESE",
+      "oficial": "TOVESE CORRETORA DE SEGUROS LTDA",
+      "aliases": [
+        "tovese",
+        "tovese corretora",
+        "tovese corretora de seguros ltda"
+      ]
+    }
+  ],
+  "enriquecer": [
+    "Telefone",
+    "Grupo de Produção",
+    "Corretor",
+    "PRODUTO",
+    "Inicio de Vigência",
+    "Final de Vigência",
+    "Projeto",
+    "Agência",
+    "Agente",
+    "Cultura"
+  ],
+  "biMapping": {
+    "Telefone": "Cliente Telefone",
+    "Grupo de Produção": "Grupo de Produção",
+    "Corretor": "Corretora",
+    "PRODUTO": "Produto",
+    "Inicio de Vigência": "Data Inicio Vigência",
+    "Final de Vigência": "Data Fim Vigência",
+    "Projeto": "Projeto",
+    "Agência": "Agência",
+    "Agente": "Consultor",
+    "Cultura": "Cultura"
+  },
+  "biCamposProposta": [
+    "Proposta Cia",
+    "Proposta / Controle"
+  ],
+  "biCamposApolice": [
+    "Numero Apolice",
+    "Apólice",
+    "Numero da apolice",
+    "Apólice / Contrato"
+  ],
+  "biCampoSegurado": "Cliente",
+  "camposSemNinf": [
+    "Telefone",
+    "Grupo de Produção",
+    "PRODUTO",
+    "Inicio de Vigência",
+    "Final de Vigência",
+    "Projeto",
+    "Agência",
+    "Agente",
+    "Cultura"
+  ],
+  "camposEnriquecerHistorico": [
+    "Telefone",
+    "_Origem",
+    "Grupo de Produção",
+    "Filial",
+    "Corretor",
+    "PRODUTO",
+    "Inicio de Vigência",
+    "Final de Vigência",
+    "Projeto",
+    "Agência",
+    "Agente",
+    "Cultura",
+    "Valor Total"
+  ]
+}

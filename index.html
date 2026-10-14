@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ISA Agro | Integração de Seguros Agro</title>
+
+   <!--=============== FONTS ===============-->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+   <!--=============== ICONS ===============-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="assets/CSS/styles.css">
+</head>
+
+<body>
+   <!--=============== HEADER ===============-->
+   <header class="header">
+      <div class="header__container">
+         <a href="#" class="header__logo">
+            <span class="header__mark">IS</span>
+            <span>ISAgro</span>
+         </a>
+
+         <div class="header__actions">
+
+            <button class="header__toggle" id="header-toggle" aria-label="Abrir menu">
+               <i class="ri-apps-2-line"></i>
+            </button>
+         </div>
+      </div>
+   </header>
+
+   <!--=============== SIDEBAR ===============-->
+   <nav class="sidebar" id="sidebar">
+      <div class="sidebar__container">
+         <div class="sidebar__logo">
+            <span class="header__mark">IS</span>
+            <span>ISAgro — Integração de Seguros Agro</span>
+         </div>
+
+         <div class="sidebar__content" id="sidebar-groups">
+            <div class="sidebar__group">
+               <button class="sidebar__link is-active" data-target="consolidar">
+                  <i class="ri-stack-line"></i>
+                  <span>Consolidar</span>
+               </button>
+
+               <button class="sidebar__link" data-target="buscar">
+                  <i class="ri-search-2-line"></i>
+                  <span>Buscar e enriquecer</span>
+               </button>
+
+               <button class="sidebar__link" data-target="dashboard">
+                  <i class="ri-dashboard-line"></i>
+                  <span>Dashboard</span>
+               </button>
+
+               <button class="sidebar__link" data-target="historico">
+                  <i class="ri-refresh-line"></i>
+                  <span>Atualizar histórico</span>
+               </button>
+            </div>
+         </div>
+
+         <p class="sidebar__note"><i class="ri-shield-check-line"></i> Processamento local, sem banco de dados.</p>
+      </div>
+   </nav>
+
+   <!--=============== MAIN ===============-->
+   <main class="main">
+
+      <!--=============== VIEW: CONSOLIDAR ===============-->
+      <section class="view is-active" id="view-consolidar" data-view="consolidar">
+         <div class="view__intro reveal">
+            <span class="eyebrow">Fase 01 · Consolidação</span>
+            <h1>Consolidar os arquivos da semana</h1>
+            <p>Preencha apenas os campos das companhias recebidas — de 1 a 8 arquivos. Cada um é validado
+               individualmente antes da consolidação.</p>
+         </div>
+
+         <div class="cards" id="company-cards"></div>
+         <!-- Cards montados dinamicamente por company-mappings.js a partir de assets/JS/data/config.json -->
+
+         <div class="summary reveal">
+            <div class="summary__info">
+               <div class="summary__row">
+                  <span>Companhias selecionadas</span>
+                  <strong id="summary-count">0 de 8</strong>
+               </div>
+               <div class="summary__row">
+                  <span>Status da execução</span>
+                  <strong class="status status--empty" id="summary-status">Aguardando arquivos</strong>
+               </div>
+            </div>
+
+            <button class="button button-item" id="btn-consolidar" disabled data-action="consolidar">
+               <span class="button-bg">
+                  <span class="button-bg-layers">
+                     <span class="button-bg-layer button-bg-layer-1 -purple"></span>
+                     <span class="button-bg-layer button-bg-layer-2 -turquoise"></span>
+                     <span class="button-bg-layer button-bg-layer-3 -yellow"></span>
+                  </span>
+               </span>
+               <span class="button-inner">
+                  <span class="button-inner-static">Consolidar</span>
+                  <span class="button-inner-hover">Consolidar</span>
+               </span>
+            </button>
+         </div>
+
+         <div class="preview" id="consolidado-preview" hidden>
+            <div class="preview__toolbar">
+               <h2>Pré-visualização do Consolidado</h2>
+               <div class="preview__count-card" id="consolidado-preview-count">
+                  <i class="ri-list-check-2"></i>
+                  <span></span>
+               </div>
+               <button class="preview__clear-filters" type="button" id="btn-limpar-filtros-consolidado">
+                  <i class="ri-filter-off-line"></i>
+                  <span>Limpar filtros</span>
+               </button>
+               <button class="preview__download" type="button" id="btn-baixar-consolidado" disabled>
+                  <i class="ri-file-excel-2-fill"></i>
+                  <span>Baixar Consolidado Agro.xlsx</span>
+               </button>
+            </div>
+            <div class="preview__table-wrap" id="preview-table-wrap"></div>
+         </div>
+
+         <div class="preview" id="duplicados-preview" hidden>
+            <div class="preview__toolbar">
+               <h2 id="duplicados-preview-title">Casos duplicados encontrados</h2>
+               <div class="preview__count-card" id="duplicados-preview-count">
+                  <i class="ri-list-check-2"></i>
+                  <span></span>
+               </div>
+               <button class="preview__clear-filters" type="button" id="btn-limpar-filtros-duplicados">
+                  <i class="ri-filter-off-line"></i>
+                  <span>Limpar filtros</span>
+               </button>
+               <button class="preview__download" type="button" id="btn-baixar-duplicados" disabled>
+                  <i class="ri-file-excel-2-fill"></i>
+                  <span>Baixar Duplicados Agro.xlsx</span>
+               </button>
+            </div>
+            <p class="preview__hint">
+               <i class="ri-error-warning-line"></i>
+               Esses registros não entram no Consolidado Agro. Revise se realmente são
+               duplicados — caso não sejam, adicione-os manualmente no arquivo baixado
+               antes de seguir para a Fase 02.
+            </p>
+            <div class="preview__table-wrap" id="preview-duplicados-table-wrap"></div>
+         </div>
+      </section>
+
+      <!--=============== VIEW: BUSCAR ===============-->
+      <section class="view" id="view-buscar" data-view="buscar">
+         <div class="view__intro reveal">
+            <span class="eyebrow">Fase 02 · Busca e enriquecimento</span>
+            <h1>Buscar e enriquecer informações</h1>
+            <p>Envie o Consolidado Agro.xlsx junto com um arquivo-base de consulta. Só os campos sem
+               informação válida são preenchidos.</p>
+         </div>
+
+         <div class="cards cards--pair" id="buscar-cards">
+            <article class="card reveal" data-company="consolidado" style="--i:0">
+               <div class="card__tab">CA</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>Consolidado Agro</h3>
+                     <span class="status status--empty" data-status>Vazio</span>
+                  </div>
+
+                  <p class="card__hint" id="consolidado-session-hint" hidden>
+                     <i class="ri-checkbox-circle-line"></i>
+                     Consolidado desta sessão disponível — não precisa enviar arquivo.
+                  </p>
+
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">
+                        Arraste o arquivo ou <em>clique para selecionar</em>
+                     </span>
+                  </label>
+
+                  <button class="card__revert" type="button" id="consolidado-session-revert" hidden>
+                     <i class="ri-arrow-go-back-line"></i>
+                     <span>Usar o consolidado desta sessão</span>
+                  </button>
+
+                  <div class="card__file card__file--dashboard" hidden data-filerow>
+                     <div class="card__file-info">
+                        <i class="ri-file-excel-2-line"></i>
+                        <span class="card__filename" data-filename></span>
+                     </div>
+                     <button class="card__troca-btn" type="button" data-remove>
+                        <i class="ri-refresh-line"></i>
+                        <span>Trocar arquivo</span>
+                     </button>
+                  </div>
+               </div>
+            </article>
+
+            <article class="card reveal" data-company="historico" style="--i:1">
+               <div class="card__tab">HA</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>Histórico Agro</h3>
+                     <span class="status status--empty" data-status>Opcional</span>
+                  </div>
+
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">
+                        Arraste o arquivo ou <em>clique para selecionar</em>
+                     </span>
+                  </label>
+
+                  <div class="card__file" hidden data-filerow>
+                     <i class="ri-file-excel-2-line"></i>
+                     <span class="card__filename" data-filename></span>
+                     <button class="card__remove" type="button" data-remove>
+                        <i class="ri-close-line"></i>
+                     </button>
+                  </div>
+               </div>
+            </article>
+
+            <article class="card reveal" data-company="bi" style="--i:2">
+               <div class="card__tab">BI</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>Relatório BI</h3>
+                     <span class="status status--empty" data-status>Opcional</span>
+                  </div>
+
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">
+                        Arraste o arquivo ou <em>clique para selecionar</em>
+                     </span>
+                  </label>
+
+                  <div class="card__file" hidden data-filerow>
+                     <i class="ri-file-excel-2-line"></i>
+                     <span class="card__filename" data-filename></span>
+                     <button class="card__remove" type="button" data-remove>
+                        <i class="ri-close-line"></i>
+                     </button>
+                  </div>
+               </div>
+            </article>
+
+            <article class="card reveal" data-company="hubspot" style="--i:3">
+               <div class="card__tab">HS</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>HubSpot</h3>
+                     <span class="status status--empty" data-status>Opcional</span>
+                  </div>
+                  
+                  <p class="card__hint card__hint--info">
+                     <i class="ri-information-line"></i>
+                     <span>Colunas obrigatórias: <strong>Nome do ticket</strong>, <strong>Agente Agro</strong>
+                        e <strong>Grupo de produção P&amp;C</strong>. A ordem não importa.</span>
+                  </p>
+
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">
+                        Arraste o arquivo ou <em>clique para selecionar</em>
+                     </span>
+                  </label>
+
+                  <div class="card__file" hidden data-filerow>
+                     <i class="ri-file-excel-2-line"></i>
+                     <span class="card__filename" data-filename></span>
+                     <button class="card__remove" type="button" data-remove>
+                        <i class="ri-close-line"></i>
+                     </button>
+                  </div>
+               </div>
+            </article>
+         </div>
+
+         <div class="summary reveal">
+            <div class="summary__info">
+               <div class="summary__row">
+                  <span>Arquivos selecionados</span>
+                  <strong id="summary-count-buscar">0 de 2</strong>
+               </div>
+               <div class="summary__row">
+                  <span>Status da execução</span>
+                  <strong class="status status--empty" id="summary-status-buscar">Aguardando arquivos</strong>
+               </div>
+            </div>
+
+            <button class="button button-item" id="btn-buscar" disabled data-action="buscar">
+               <span class="button-bg">
+                  <span class="button-bg-layers">
+                     <span class="button-bg-layer button-bg-layer-1 -purple"></span>
+                     <span class="button-bg-layer button-bg-layer-2 -turquoise"></span>
+                     <span class="button-bg-layer button-bg-layer-3 -yellow"></span>
+                  </span>
+               </span>
+               <span class="button-inner">
+                  <span class="button-inner-static">Buscar</span>
+                  <span class="button-inner-hover">Buscar</span>
+               </span>
+            </button>
+         </div>
+
+         <div class="preview" id="enriquecido-preview" hidden>
+            <div class="preview__toolbar">
+               <h2>Pré-visualização do Consolidado Enriquecido</h2>
+               <div class="preview__count-card" id="enriquecido-preview-count">
+                  <i class="ri-list-check-2"></i>
+                  <span></span>
+               </div>
+               <button class="preview__clear-filters" type="button" id="btn-limpar-filtros-enriquecido">
+                  <i class="ri-filter-off-line"></i>
+                  <span>Limpar filtros</span>
+               </button>
+               <button class="preview__download" type="button" id="btn-baixar-enriquecido" disabled>
+                  <i class="ri-file-excel-2-fill"></i>
+                  <span>Baixar Consolidado Agro Enriquecido.xlsx</span>
+               </button>
+            </div>
+            <div class="preview__table-wrap" id="preview-enriquecido-table-wrap"></div>
+         </div>
+      </section>
+
+      <!--=============== VIEW: DASHBOARD ===============-->
+      <section class="view" id="view-dashboard" data-view="dashboard">
+         <div class="view__intro reveal">
+            <span class="eyebrow">Fase 03 · Dashboard</span>
+            <h1>Visão geral e comparação entre execuções</h1>
+            <p>Envie o Consolidado Agro mais recente para ver um resumo visual da semana. A comparação
+               com a última execução analisada neste navegador aparece automaticamente logo abaixo.</p>
+         </div>
+
+         <div class="cards cards--single">
+            <article class="card reveal" data-company="dashboard" style="--i:0">
+               <div class="card__tab">CA</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>Consolidado Agro</h3>
+                     <span class="status status--empty" data-status>Vazio</span>
+                  </div>
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">Arraste o arquivo ou <em>clique para selecionar</em></span>
+                  </label>
+
+                  <button class="card__revert" type="button" id="dashboard-session-revert" hidden>
+                     <i class="ri-arrow-go-back-line"></i>
+                     <span>Usar o enriquecido desta sessão</span>
+                  </button>
+
+                  <div class="card__file card__file--dashboard" hidden data-filerow>
+                     <div class="card__file-info">
+                        <i class="ri-file-excel-2-line"></i>
+                        <span class="card__filename" data-filename></span>
+                     </div>
+                     <button class="card__troca-btn" type="button" data-remove>
+                        <i class="ri-refresh-line"></i>
+                        <span>Trocar arquivo</span>
+                     </button>
+                  </div>
+               </div>
+            </article>
+         </div>
+
+         <div class="dash-empty" id="dash-empty">
+            <i class="ri-bar-chart-grouped-line"></i>
+            <p>Envie um Consolidado Agro acima para ver o dashboard.</p>
+         </div>
+
+         <div class="dash-content" id="dash-content" hidden>
+
+            <div class="dash-totals">
+               <div class="dash-total">
+                  <span>Valor Total</span>
+                  <strong id="dash-total-valor">R$ 0,00</strong>
+               </div>
+               <div class="dash-total">
+                  <span>Total Vencido</span>
+                  <strong id="dash-total-vencido">R$ 0,00</strong>
+               </div>
+               <div class="dash-total">
+                  <span>Total A Vencer</span>
+                  <strong id="dash-total-a-vencer">R$ 0,00</strong>
+               </div>
+            </div>
+
+            <div class="dash-grid">
+               <div class="dash-panel reveal">
+                  <h3>Registros por Status</h3>
+                  <div class="dash-panel__body" id="dash-status-body"></div>
+               </div>
+
+               <div class="dash-panel reveal">
+                  <h3>Distribuição de Aging</h3>
+                  <div class="dash-panel__body" id="dash-aging-body"></div>
+               </div>
+
+               <div class="dash-panel dash-panel--wide reveal">
+                  <h3>Valor total por seguradora</h3>
+                  <div class="dash-panel__body" id="dash-seguradora-body"></div>
+               </div>
+
+               <div class="dash-panel dash-panel--wide reveal">
+                  <h3>Top corretores por volume</h3>
+                  <div class="dash-panel__body" id="dash-corretores-body"></div>
+               </div>
+            </div>
+
+            <div class="dash-relatorios">
+               <div class="dash-relatorios__head">
+                  <div class="view__intro">
+                     <span class="eyebrow">Relatórios por agente</span>
+                     <h2>Gerar relatórios da semana</h2>
+                     <p>Escolha o agente e baixe o relatório em Excel ou o arquivo de cobrança da Zenvia.</p>
+                  </div>
+
+                  <div class="dash-relatorios__select">
+                     <label for="dash-agente-select">
+                        <i class="ri-user-3-line"></i>
+                        Agente
+                     </label>
+                     <select id="dash-agente-select">
+                        <option value="">Selecionar agente</option>
+                     </select>
+                  </div>
+               </div>
+
+               <div class="dash-relatorios__grid">
+                  <section class="dash-rel-card dash-rel-card--excel">
+                     <header class="dash-rel-card__head">
+                        <span class="dash-rel-card__icon"><i class="ri-file-excel-2-line"></i></span>
+                        <div>
+                           <h3>Relatório semanal</h3>
+                           <span class="dash-rel-card__format">Excel (.xlsx)</span>
+                        </div>
+                     </header>
+                     <p class="dash-rel-card__desc">4 abas: Dinâmica, Consolidado Agro, A Vencer e Vencido.</p>
+                     <div class="dash-rel-card__actions">
+                        <button type="button" class="dash-rel-btn dash-rel-btn--primary" id="dash-btn-baixar-agente" disabled>
+                           <i class="ri-user-3-line"></i>
+                           <span>Agente selecionado</span>
+                        </button>
+                        <button type="button" class="dash-rel-btn dash-rel-btn--ghost" id="dash-btn-baixar-geral" disabled>
+                           <i class="ri-stack-line"></i>
+                           <span>Consolidado geral</span>
+                        </button>
+                     </div>
+                  </section>
+
+                  <section class="dash-rel-card dash-rel-card--zenvia">
+                     <header class="dash-rel-card__head">
+                        <span class="dash-rel-card__icon"><i class="ri-message-3-line"></i></span>
+                        <div>
+                           <h3>Cobrança Zenvia</h3>
+                           <span class="dash-rel-card__format">CSV (.csv)</span>
+                        </div>
+                     </header>
+                     <p class="dash-rel-card__desc">Apenas parcelas A Vencer, um telefone por linha.</p>
+                     <div class="dash-rel-card__actions">
+                        <button type="button" class="dash-rel-btn dash-rel-btn--primary" id="dash-btn-baixar-zenvia" disabled>
+                           <i class="ri-user-3-line"></i>
+                           <span>Agente selecionado</span>
+                        </button>
+                        <button type="button" class="dash-rel-btn dash-rel-btn--ghost" id="dash-btn-baixar-zenvia-todos" disabled>
+                           <i class="ri-group-line"></i>
+                           <span>Todos os agentes</span>
+                        </button>
+                     </div>
+                  </section>
+               </div>
+            </div>
+
+            <div class="dash-diff">
+               <div class="view__intro">
+                  <span class="eyebrow">Comparação entre execuções</span>
+                  <h2>O que mudou desde a semana passada</h2>
+               </div>
+
+               <div class="dash-diff-snapshot" id="dash-diff-snapshot"></div>
+
+               <div class="dash-diff-tabs">
+                  <button type="button" class="dash-diff-tab is-active" data-diff-tab="anterior">Semana
+                     anterior</button>
+                  <button type="button" class="dash-diff-tab" data-diff-tab="comparacao">Comparação</button>
+               </div>
+
+               <div class="dash-diff-panel is-active" data-diff-panel="anterior" id="dash-diff-anterior"></div>
+               <div class="dash-diff-panel" data-diff-panel="comparacao" id="dash-diff-comparacao"></div>
+
+               <div class="preview" id="pagos-preview" hidden>
+                  <div class="preview__toolbar">
+                     <h2>Não Localizados com Status de Pagamento</h2>
+                     <div class="preview__count-card" id="pagos-preview-count">
+                        <i class="ri-list-check-2"></i>
+                        <span></span>
+                     </div>
+                     <button class="preview__clear-filters" type="button" id="btn-limpar-filtros-pagos">
+                        <i class="ri-filter-off-line"></i>
+                        <span>Limpar filtros</span>
+                     </button>
+                     <button class="preview__download" type="button" id="btn-baixar-pagos">
+                        <i class="ri-file-excel-2-fill"></i>
+                        <span>Baixar Não Localizados com Status.xlsx</span>
+                     </button>
+                  </div>
+                  <div class="preview__table-wrap" id="preview-pagos-table-wrap"></div>
+               </div>
+            </div>
+
+         </div>
+      </section>
+
+      <!--=============== VIEW: HISTORICO ===============-->
+      <section class="view" id="view-historico" data-view="historico">
+         <div class="view__intro reveal">
+            <span class="eyebrow">Fase 04 · Atualização de histórico</span>
+            <h1>Atualizar o Histórico Agro</h1>
+            <p>Envie o Consolidado Agro mais recente e o Histórico Agro atual. Registros novos
+               são cadastrados e campos ainda sem informação são preenchidos — nada que já
+               esteja preenchido no histórico é sobrescrito.</p>
+         </div>
+
+         <div class="cards cards--pair" id="historico-cards">
+            <article class="card reveal" data-company="consolidado-h" style="--i:0">
+               <div class="card__tab">CA</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>Consolidado Agro</h3>
+                     <span class="status status--empty" data-status>Vazio</span>
+                  </div>
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">Arraste o arquivo ou <em>clique para selecionar</em></span>
+                  </label>
+                  <div class="card__file" hidden data-filerow>
+                     <i class="ri-file-excel-2-line"></i>
+                     <span class="card__filename" data-filename></span>
+                     <button class="card__remove" type="button" data-remove>
+                        <i class="ri-close-line"></i>
+                     </button>
+                  </div>
+               </div>
+            </article>
+
+            <article class="card reveal" data-company="historico-h" style="--i:1">
+               <div class="card__tab">HA</div>
+               <div class="card__body">
+                  <div class="card__head">
+                     <h3>Histórico Agro</h3>
+                     <span class="status status--empty" data-status>Vazio</span>
+                  </div>
+                  <label class="dropzone">
+                     <input type="file" accept=".xlsx,.xls,.xlsm" hidden data-input>
+                     <i class="ri-upload-cloud-2-line"></i>
+                     <span class="dropzone__text">Arraste o arquivo ou <em>clique para selecionar</em></span>
+                  </label>
+                  <div class="card__file" hidden data-filerow>
+                     <i class="ri-file-excel-2-line"></i>
+                     <span class="card__filename" data-filename></span>
+                     <button class="card__remove" type="button" data-remove>
+                        <i class="ri-close-line"></i>
+                     </button>
+                  </div>
+               </div>
+            </article>
+         </div>
+
+         <div class="summary reveal">
+            <div class="summary__info">
+               <div class="summary__row">
+                  <span>Arquivos selecionados</span>
+                  <strong id="summary-count-historico">0 de 2</strong>
+               </div>
+               <div class="summary__row">
+                  <span>Status da execução</span>
+                  <strong class="status status--empty" id="summary-status-historico">Aguardando arquivos</strong>
+               </div>
+            </div>
+
+            <button class="button button-item" id="btn-historico" disabled data-action="historico">
+               <span class="button-bg">
+                  <span class="button-bg-layers">
+                     <span class="button-bg-layer button-bg-layer-1 -purple"></span>
+                     <span class="button-bg-layer button-bg-layer-2 -turquoise"></span>
+                     <span class="button-bg-layer button-bg-layer-3 -yellow"></span>
+                  </span>
+               </span>
+               <span class="button-inner">
+                  <span class="button-inner-static">Atualizar e baixar</span>
+                  <span class="button-inner-hover">Atualizar e baixar</span>
+               </span>
+            </button>
+         </div>
+
+         <div class="preview" id="historico-preview" hidden>
+            <div class="preview__toolbar">
+               <h2>Resultado da atualização</h2>
+            </div>
+
+            <div class="dash-totals">
+               <div class="dash-total">
+                  <span>Cadastrados (novos)</span>
+                  <strong id="historico-stat-cadastrados">0</strong>
+               </div>
+               <div class="dash-total">
+                  <span>Atualizados</span>
+                  <strong id="historico-stat-atualizados">0</strong>
+               </div>
+               <div class="dash-total">
+                  <span>Sem alteração</span>
+                  <strong id="historico-stat-ignorados">0</strong>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </main>
+
+   <!--=============== FOOTER ===============-->
+   <footer class="footer">
+      <p><i class="ri-shield-check-line"></i> Processamento local no navegador. Nenhum arquivo ou dado é
+         armazenado entre execuções.</p>
+   </footer>
+
+   <!--=============== LOADING OVERLAY ===============-->
+   <div class="loading-overlay" id="loading-overlay" aria-hidden="true">
+      <div class="loader">
+         <span class="loader__ball"></span>
+         <span class="loader__step"></span>
+         <span class="loader__step"></span>
+         <span class="loader__step"></span>
+      </div>
+      <p class="loading-overlay__text" id="loading-overlay-text">Consolidando arquivos...</p>
+   </div>
+
+   <!--=============== ERROR MODAL ===============-->
+   <div class="modal" id="error-modal" role="alertdialog" aria-modal="true" aria-hidden="true">
+      <div class="modal__card">
+         <div class="modal__icon"><i class="ri-error-warning-line"></i></div>
+         <h2>Não deu pra consolidar</h2>
+         <p id="error-modal-message"></p>
+         <ul class="modal__list" id="error-modal-list"></ul>
+         <button class="modal__close" type="button" id="error-modal-close">Entendi</button>
+      </div>
+   </div>
+
+   <!--=============== CONFIRM MODAL ===============-->
+   <div class="modal" id="confirm-modal" role="alertdialog" aria-modal="true" aria-hidden="true">
+      <div class="modal__card">
+         <div class="modal__icon"><i class="ri-question-line"></i></div>
+         <h2>Tem certeza?</h2>
+         <p id="confirm-modal-message"></p>
+         <div class="modal__actions">
+            <button class="modal__close modal__close--ghost" type="button" id="confirm-modal-cancel">Adicionar
+               Mais</button>
+            <button class="modal__close" type="button" id="confirm-modal-confirm">Continuar</button>
+         </div>
+      </div>
+   </div>
+
+   <!--=============== MODAL: COMPARAR COM PAGOS ===============-->
+   <div class="modal" id="pagos-modal" role="alertdialog" aria-modal="true" aria-hidden="true">
+      <div class="modal__card modal__card--wide">
+         <div class="modal__icon"><i class="ri-file-search-line"></i></div>
+         <h2>Comparar com Pagos</h2>
+         <p>Selecione a companhia e envie o relatório de pagos correspondente. Dá pra repetir para mais de uma companhia
+            antes de buscar.</p>
+
+         <div class="pagos-modal__selector">
+            <label for="pagos-modal-company-select">
+               Selecione a companhia para receber o relatório
+            </label>
+
+            <select id="pagos-modal-company-select">
+               <option value="">Selecionar companhia</option>
+            </select>
+         </div>
+
+         <div class="pagos-modal__files" id="pagos-modal-files"></div>
+
+         <div class="pagos-modal__upload" id="pagos-modal-upload" hidden>
+            <p class="pagos-modal__upload-label" id="pagos-modal-upload-label"></p>
+            <label class="dropzone">
+               <input type="file" accept=".xlsx,.xls,.xlsm" hidden id="pagos-modal-input">
+               <i class="ri-upload-cloud-2-line"></i>
+               <span class="dropzone__text">
+                  Arraste o arquivo ou <em>clique para selecionar</em>
+               </span>
+            </label>
+         </div>
+
+         <div class="pagos-modal__files" id="pagos-modal-files"></div>
+
+         <div class="pagos-modal__resultado" id="pagos-modal-resultado" hidden></div>
+
+         <div class="modal__actions">
+            <button class="modal__close modal__close--ghost" type="button" id="pagos-modal-cancel">Fechar</button>
+            <button class="modal__close" type="button" id="pagos-modal-buscar" disabled>Buscar status</button>
+         </div>
+      </div>
+   </div>
+
+   <!--=============== JS ===============-->
+   <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+   <script src="assets/JS/xlsx-worker-client.js"></script>
+   <script src="assets/JS/company-mappings.js"></script>
+   <script src="assets/JS/rules.js"></script>
+   <script src="assets/JS/preview-table.js"></script>
+   <script src="assets/JS/consolidacao.js"></script>
+   <script src="assets/JS/busca-enriquecimento.js"></script>
+   <script src="assets/JS/atualizar-historico.js"></script>
+   <script src="assets/JS/dashboard.js"></script>
+   <script src="assets/JS/validacao.js"></script>
+   <script src="assets/JS/main.js"></script>
+</body>
+
+</html>
